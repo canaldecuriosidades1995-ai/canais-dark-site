@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Conectando ao TikTok · Canais Dark</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<main>
+  <h1>Conectando ao TikTok...</h1>
+  <p>Voltando para o app Canais Dark no seu computador.</p>
+  <p id="aviso" hidden>
+    Se nada acontecer, confira se o app está aberto (<code>npm run dev -- -p 3001</code>) e
+    <a id="link" href="#">clique aqui para continuar</a>.
+  </p>
+  <p lang="en" class="data">Returning to the Canais Dark app on your computer...</p>
+</main>
+<script>
+  // Página "ponte": o TikTok só aceita endereço de retorno com https, então ele volta para cá
+  // e esta página repassa o código do login para o app que roda no computador (localhost).
+  // Quem abre esta página é o próprio navegador do usuário, por isso "localhost" é o computador dele.
+  var destino = "http://localhost:3001/api/tiktok/callback" + window.location.search;
+  document.getElementById("link").href = destino;
+  setTimeout(function () { document.getElementById("aviso").hidden = false; }, 4000);
+  window.location.replace(destino);
+</script>
+</body>
+</html>
