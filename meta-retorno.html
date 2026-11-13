@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Conectando ao Instagram · Canais Dark</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<main>
+  <h1>Conectando ao Instagram...</h1>
+  <p>Voltando para o app Canais Dark no seu computador.</p>
+  <p id="aviso" hidden>
+    Se nada acontecer, confira se o app está aberto (<code>npm run dev -- -p 3001</code>) e
+    <a id="link" href="#">clique aqui para continuar</a>.
+  </p>
+  <p lang="en" class="data">Returning to the Canais Dark app on your computer...</p>
+</main>
+<script>
+  // Página "ponte": a Meta só aceita endereço de retorno com https, então o login unificado (Facebook/Instagram) volta para cá
+  // e esta página repassa o código do login para o app que roda no computador (localhost).
+  // Quem abre esta página é o próprio navegador do usuário, por isso "localhost" é o computador dele.
+  // (O Instagram às vezes acrescenta "#_" no fim do endereço; o hash não é repassado.)
+  var destino = "http://localhost:3001/api/instagram/meta/callback" + window.location.search;
+  document.getElementById("link").href = destino;
+  setTimeout(function () { document.getElementById("aviso").hidden = false; }, 4000);
+  window.location.replace(destino);
+</script>
+</body>
+</html>
